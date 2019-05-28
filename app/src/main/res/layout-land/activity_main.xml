@@ -50,7 +50,7 @@
             app:layout_row="0" />
 
         <TextView
-            android:id="@+id/TimeTextView"
+            android:id="@+id/timeTextView"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -93,7 +93,7 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/FinishTextView"
+            android:id="@+id/finishTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -108,7 +108,7 @@
             app:layout_row="3" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
