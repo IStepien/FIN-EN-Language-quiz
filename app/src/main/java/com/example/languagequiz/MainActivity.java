@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button playButton;
     TextView finishTextView;
     TextView questionTextView;
+    TextView scoreTextView;
 
     @Override
 
@@ -32,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
         timeTextView = findViewById(R.id.timeTextView);
         finishTextView = findViewById(R.id.finishTextView);
         questionTextView = findViewById(R.id.questionTextView);
-
+        scoreTextView = findViewById(R.id.scoreTextView);
 
         setQuestion();
+        updateScore(0);
 
     }
 
@@ -73,5 +75,8 @@ public class MainActivity extends AppCompatActivity {
         Random random = new Random();
         int nextQuestion = random.nextInt(numberOfQuestions);
         questionTextView.setText("Finnish word for\n" + questionWords[nextQuestion]);
+    }
+    public void updateScore(int value){
+        scoreTextView.setText(String.valueOf(value)+"/"+questionWords.length);
     }
 }
