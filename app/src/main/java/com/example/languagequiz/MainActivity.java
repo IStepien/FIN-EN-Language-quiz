@@ -15,7 +15,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     String[] questionWords = {"\"night\"", "\"wine\"", "\"pig\"", "\"snake\"", "\"computer\""};
-    String[][] answers = {{"kuu","öy", "silta"}, {"viini","viina","vesi"},{"ihminen","sika", "lautanen"},{"käärme", "poika", "kahdeksantoista"}, {"tiekokone", "kampa", "ohje"}};
+    String[][] answers = {{"kuu", "öy", "silta"}, {"viini", "viina", "vesi"}, {"ihminen", "sika", "lautanen"}, {"käärme", "poika", "kahdeksantoista"}, {"tiekokone", "kampa", "ohje"}};
 
     TextView timeTextView;
     Button playButton;
@@ -48,19 +48,7 @@ public class MainActivity extends AppCompatActivity {
         playButton.setVisibility(View.INVISIBLE);
         setQuestion();
         setAnswers(questionNumber);
-        CountDownTimer countDownTimer = new CountDownTimer(30000, 1) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                updateTime((int) millisUntilFinished / 1000);
-
-            }
-
-            @Override
-            public void onFinish() {
-                playButton.setVisibility(View.VISIBLE);
-                finishTextView.setVisibility(View.VISIBLE);
-            }
-        }.start();
+        setCountDownTimer();
 
     }
 
@@ -75,21 +63,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setQuestion() {
-        int numberOfQuestions = questionWords.length-1;
+        int numberOfQuestions = questionWords.length - 1;
 
         Random random = new Random();
-        questionNumber= random.nextInt(numberOfQuestions);
+        questionNumber = random.nextInt(numberOfQuestions);
         questionTextView.setText("Finnish word for\n" + questionWords[questionNumber]);
 
     }
-    public void updateScore(int value){
-        scoreTextView.setText(String.valueOf(value)+"/"+questionWords.length);
-    }
-    public void setAnswers(int questionNumber){
 
-        for(int i=0; i<radioGroup.getChildCount(); i++){
+    public void updateScore(int value) {
+        scoreTextView.setText(String.valueOf(value) + "/" + questionWords.length);
+    }
+
+    public void setAnswers(int questionNumber) {
+
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
             String nextAnswer = answers[questionNumber][i];
-            ((RadioButton)  radioGroup.getChildAt(i)).setText(nextAnswer);
+            ((RadioButton) radioGroup.getChildAt(i)).setText(nextAnswer);
         }
+    }
+
+    public void setCountDownTimer() {
+        CountDownTimer countDownTimer = new CountDownTimer(30000, 1) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                updateTime((int) millisUntilFinished / 1000);
+
+            }
+
+            @Override
+            public void onFinish() {
+                playButton.setVisibility(View.VISIBLE);
+                finishTextView.setVisibility(View.VISIBLE);
+            }
+        }.start();
     }
 }
