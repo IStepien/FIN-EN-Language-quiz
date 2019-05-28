@@ -3,6 +3,7 @@ package com.example.languagequiz;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +16,8 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     String[] questionWords = {"\"night\"", "\"wine\"", "\"pig\"", "\"snake\"", "\"computer\""};
-    String[][] answers = {{"kuu", "öy", "silta"}, {"viini", "viina", "vesi"}, {"ihminen", "sika", "lautanen"}, {"käärme", "poika", "kahdeksantoista"}, {"tiekokone", "kampa", "ohje"}};
+    String[][] answers = {{"kuu", "öy", "silta"}, {"viini", "viina", "vesi"}, {"ihminen", "sika", "lautanen"}, {"käärme", "poika", "kahdeksantoista"}, {"kampa", "tiekokone", "ohje"}};
+    String[] correctAnswers = {"öy", "viini", "sika", "käärme", "tiekokone"};
 
     TextView timeTextView;
     Button playButton;
@@ -23,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     TextView questionTextView;
     TextView scoreTextView;
     RadioGroup radioGroup;
-    int questionNumber;
+    int questionNumber = 0;
+    int score = 0;
 
     @Override
 
@@ -38,23 +41,55 @@ public class MainActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         radioGroup = findViewById(R.id.radioGroup);
 
-        questionTextView.setText("Finnish word for\n");
-        updateScore(0);
-
 
     }
 
     public void play(View view) {
+
         playButton.setVisibility(View.INVISIBLE);
-        setQuestion();
-        setAnswers(questionNumber);
+        radioGroup.setVisibility(View.VISIBLE);
         setCountDownTimer();
+        setQuestion(questionNumber);
+        setAnswers(questionNumber);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Button checked = findViewById(checkedId);
+
+
+
+                if (checked.getText().equals(correctAnswers[questionNumber])) {
+
+                        score++;
+                        updateScore(score);
+
+                    if(score==questionWords.length || questionNumber == questionWords.length-1){
+                        playButton.setVisibility(View.VISIBLE);
+                        finishTextView.setVisibility(View.VISIBLE);
+
+                    }
+                }
+
+                if (questionNumber < questionWords.length - 1) {
+                    questionNumber++;
+                }
+
+                setQuestion(questionNumber);
+                setAnswers(questionNumber);
+
+
+            }
+
+        });
+
+
+
 
     }
 
     public void updateTime(int timeLeft) {
         timeTextView.setText(checkDigit(timeLeft) + "s");
-
 
     }
 
@@ -62,17 +97,16 @@ public class MainActivity extends AppCompatActivity {
         return digit <= 9 ? "0" + digit : String.valueOf(digit);
     }
 
-    public void setQuestion() {
-        int numberOfQuestions = questionWords.length - 1;
+    public void setQuestion(int questionNumber) {
 
-        Random random = new Random();
-        questionNumber = random.nextInt(numberOfQuestions);
         questionTextView.setText("Finnish word for\n" + questionWords[questionNumber]);
+
 
     }
 
     public void updateScore(int value) {
         scoreTextView.setText(String.valueOf(value) + "/" + questionWords.length);
+
     }
 
     public void setAnswers(int questionNumber) {
@@ -81,10 +115,11 @@ public class MainActivity extends AppCompatActivity {
             String nextAnswer = answers[questionNumber][i];
             ((RadioButton) radioGroup.getChildAt(i)).setText(nextAnswer);
         }
+
     }
 
     public void setCountDownTimer() {
-        CountDownTimer countDownTimer = new CountDownTimer(30000, 1) {
+        CountDownTimer countDownTimer = new CountDownTimer(60000, 1) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTime((int) millisUntilFinished / 1000);
@@ -95,7 +130,12 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 playButton.setVisibility(View.VISIBLE);
                 finishTextView.setVisibility(View.VISIBLE);
+
             }
         }.start();
+
     }
+
+
+
 }

@@ -67,15 +67,14 @@
 
         <RadioGroup
             android:id="@+id/radioGroup"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill"
-            android:layout_height="wrap_content"
-            app:layout_row="1"
             app:layout_column="1"
+            app:layout_columnWeight="1"
 
-            >
+            app:layout_gravity="fill"
+            app:layout_row="1">
 
             <RadioButton
                 android:id="@+id/radioButton2"
