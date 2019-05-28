@@ -15,13 +15,15 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     String[] questionWords = {"\"night\"", "\"wine\"", "\"pig\"", "\"snake\"", "\"computer\""};
-
+    String[][] answers = {{"kuu","öy", "silta"}, {"viini","viina","vesi"},{"ihminen","sika", "lautanen"},{"käärme", "poika", "kahdeksantoista"}, {"tiekokone", "kampa", "ohje"}};
 
     TextView timeTextView;
     Button playButton;
     TextView finishTextView;
     TextView questionTextView;
     TextView scoreTextView;
+    RadioGroup radioGroup;
+    int questionNumber;
 
     @Override
 
@@ -34,15 +36,18 @@ public class MainActivity extends AppCompatActivity {
         finishTextView = findViewById(R.id.finishTextView);
         questionTextView = findViewById(R.id.questionTextView);
         scoreTextView = findViewById(R.id.scoreTextView);
+        radioGroup = findViewById(R.id.radioGroup);
 
-        setQuestion();
+        questionTextView.setText("Finnish word for\n");
         updateScore(0);
+
 
     }
 
     public void play(View view) {
         playButton.setVisibility(View.INVISIBLE);
-
+        setQuestion();
+        setAnswers(questionNumber);
         CountDownTimer countDownTimer = new CountDownTimer(30000, 1) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -70,13 +75,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setQuestion() {
-        int numberOfQuestions = questionWords.length;
+        int numberOfQuestions = questionWords.length-1;
 
         Random random = new Random();
-        int nextQuestion = random.nextInt(numberOfQuestions);
-        questionTextView.setText("Finnish word for\n" + questionWords[nextQuestion]);
+        questionNumber= random.nextInt(numberOfQuestions);
+        questionTextView.setText("Finnish word for\n" + questionWords[questionNumber]);
+
     }
     public void updateScore(int value){
         scoreTextView.setText(String.valueOf(value)+"/"+questionWords.length);
+    }
+    public void setAnswers(int questionNumber){
+
+        for(int i=0; i<radioGroup.getChildCount(); i++){
+            String nextAnswer = answers[questionNumber][i];
+            ((RadioButton)  radioGroup.getChildAt(i)).setText(nextAnswer);
+        }
     }
 }
