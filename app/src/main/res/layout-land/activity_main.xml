@@ -8,14 +8,14 @@
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/gridLayout"
-        android:layout_width="300dp"
-        android:layout_height="550dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         app:columnCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,9 +34,8 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_column="0"
-            app:layout_row="0"
             app:layout_gravity="fill"
-            />
+            app:layout_row="0" />
 
         <TextView
             android:id="@+id/questionTextView"
@@ -47,9 +46,8 @@
             android:text="question"
             android:textSize="30sp"
             app:layout_column="1"
-            app:layout_row="0"
             app:layout_gravity="fill"
-            />
+            app:layout_row="0" />
 
         <TextView
             android:id="@+id/TimeTextView"
@@ -60,19 +58,18 @@
             android:text="time"
             android:textSize="30sp"
             app:layout_column="2"
-            app:layout_row="0"
             app:layout_gravity="fill"
-            />
+            app:layout_row="0" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
+            app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_gravity="fill"
-            android:layout_height="wrap_content"
             app:layout_row="1"
-            app:layout_column="1"
 
             >
 
@@ -80,36 +77,30 @@
                 android:id="@+id/radioButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:text="RadioButton" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:text="RadioButton" />
 
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:text="RadioButton" />
         </RadioGroup>
 
         <TextView
             android:id="@+id/FinishTextView"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
             android:text="finished"
             android:textSize="30sp"
             app:layout_column="1"
@@ -120,10 +111,14 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_column="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="PLAY"
+            app:layout_column="2"
             app:layout_columnWeight="1"
-            app:layout_row="4"
-            />
+            app:layout_row="3" />
     </android.support.v7.widget.GridLayout>
 </android.support.constraint.ConstraintLayout>
