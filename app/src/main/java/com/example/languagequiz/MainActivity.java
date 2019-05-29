@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setCountDownTimer() {
-        countDownTimer = new CountDownTimer(60000, 1) {
+        countDownTimer = new CountDownTimer(30000, 1) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTime((int) millisUntilFinished / 1000);
