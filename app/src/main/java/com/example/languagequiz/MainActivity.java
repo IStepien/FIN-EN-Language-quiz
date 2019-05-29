@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
     TextView questionTextView;
     TextView scoreTextView;
     RadioGroup radioGroup;
-    int questionNumber = 0;
-    int score = 0;
+    int questionNumber;
+    int score;
+    CountDownTimer countDownTimer;
 
     @Override
 
@@ -45,10 +46,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void play(View view) {
-
         playButton.setVisibility(View.INVISIBLE);
         radioGroup.setVisibility(View.VISIBLE);
+        finishTextView.setVisibility(View.INVISIBLE);
+        questionNumber=0;
+        score=0;
         setCountDownTimer();
+        updateScore(0);
         setQuestion(questionNumber);
         setAnswers(questionNumber);
 
@@ -58,15 +62,13 @@ public class MainActivity extends AppCompatActivity {
                 Button checked = findViewById(checkedId);
 
 
-
                 if (checked.getText().equals(correctAnswers[questionNumber])) {
 
-                        score++;
-                        updateScore(score);
+                    score++;
+                    updateScore(score);
 
-                    if(score==questionWords.length || questionNumber == questionWords.length-1){
-                        playButton.setVisibility(View.VISIBLE);
-                        finishTextView.setVisibility(View.VISIBLE);
+                    if (score == questionWords.length || questionNumber == questionWords.length - 1) {
+                        reset();
 
                     }
                 }
@@ -82,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
 
 
     }
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setCountDownTimer() {
-        CountDownTimer countDownTimer = new CountDownTimer(60000, 1) {
+        countDownTimer = new CountDownTimer(60000, 1) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateTime((int) millisUntilFinished / 1000);
@@ -128,14 +128,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                playButton.setVisibility(View.VISIBLE);
-                finishTextView.setVisibility(View.VISIBLE);
+                reset();
 
             }
         }.start();
 
     }
 
+    public void reset() {
+        countDownTimer.cancel();
+        finishTextView.setText("your score:\n" + score + "/" + questionWords.length);
+        updateScore(0);
+        playButton.setVisibility(View.VISIBLE);
+        finishTextView.setVisibility(View.VISIBLE);
+
+    }
 
 
 }
