@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         playButton.setVisibility(View.INVISIBLE);
         radioGroup.setVisibility(View.VISIBLE);
         finishTextView.setVisibility(View.INVISIBLE);
-        questionNumber=0;
-        score=0;
+        questionNumber = 0;
+        score = 0;
         setCountDownTimer();
         updateScore(0);
         setQuestion(questionNumber);
@@ -63,28 +63,25 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if (checked.getText().equals(correctAnswers[questionNumber])) {
-
                     score++;
                     updateScore(score);
 
-                    if (score == questionWords.length || questionNumber == questionWords.length - 1) {
-                        reset();
 
-                    }
+                }
+                if (score == questionWords.length || questionNumber == questionWords.length - 1) {
+                    reset();
                 }
 
                 if (questionNumber < questionWords.length - 1) {
                     questionNumber++;
+
                 }
 
                 setQuestion(questionNumber);
                 setAnswers(questionNumber);
 
-
             }
-
         });
-
 
     }
 
@@ -112,8 +109,10 @@ public class MainActivity extends AppCompatActivity {
     public void setAnswers(int questionNumber) {
 
         for (int i = 0; i < radioGroup.getChildCount(); i++) {
-            String nextAnswer = answers[questionNumber][i];
+            ((RadioButton)  radioGroup.getChildAt(i)).setChecked(false);
+             String nextAnswer = answers[questionNumber][i];
             ((RadioButton) radioGroup.getChildAt(i)).setText(nextAnswer);
+
         }
 
     }
